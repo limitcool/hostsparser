@@ -36,7 +36,7 @@ func isIPChar(ch rune) bool {
 }
 
 func isDomainChar(ch rune) bool {
-	return unicode.IsLetter(ch) || unicode.IsDigit(ch) || ch == '.' || ch == '-'
+	return unicode.IsLetter(ch) || unicode.IsDigit(ch) || ch == '.' || ch == '-' || ch == '_'
 }
 
 // 检查是否是IPv4地址
@@ -73,6 +73,13 @@ func isDomain(s string) bool {
 		if len(parts) >= 2 {
 			for _, part := range parts {
 				if part == "" {
+					return false
+				}
+				// 检查每个部分是否以字母或数字开头和结尾
+				if !unicode.IsLetter(rune(part[0])) && !unicode.IsDigit(rune(part[0])) {
+					return false
+				}
+				if !unicode.IsLetter(rune(part[len(part)-1])) && !unicode.IsDigit(rune(part[len(part)-1])) {
 					return false
 				}
 			}

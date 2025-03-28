@@ -16,7 +16,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to load hosts file: %v", err)
 	}
-
+	
 	ipDomainPairs := hostsFile.GetAllIPDomainPairs()
 
 	for _, ipDomainPair := range ipDomainPairs {
